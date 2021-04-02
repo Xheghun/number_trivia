@@ -1,7 +1,5 @@
 import '../../../../core/use_cases/use_case.dart';
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../core/error/failures.dart';
 import '../entities/number_trivia.dart';
@@ -17,4 +15,3 @@ class GetConcreteNumberTrivia implements UseCase<NumberTrivia, Params> {
     return await repository.getConcreteNumberTrivia(params.number);
   }
 }
-
