@@ -4,7 +4,6 @@ import 'package:clean_tdd/core/constants/keys.dart';
 import 'package:clean_tdd/core/error/exceptions.dart';
 import 'package:clean_tdd/feature/number_trivia/data/data_sources/number_trivia_local_datasource.dart';
 import 'package:clean_tdd/feature/number_trivia/data/models/number_trivia_model.dart';
-import 'package:flutter/material.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -49,7 +48,7 @@ void main() {
       final call = dataSource.getLastNumberTrivia;
 
       //assert
-      expect(() => dataSource.getLastNumberTrivia(),
+      expect(() => call(),
           throwsA(isInstanceOf<CacheException>()));
     });
   });
