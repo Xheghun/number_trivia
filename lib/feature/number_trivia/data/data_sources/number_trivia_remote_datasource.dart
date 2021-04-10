@@ -26,14 +26,12 @@ class NumberTriviaRemoteDataSourceImpl implements NumberTriviaRemoteDataSource {
   NumberTriviaRemoteDataSourceImpl({@required this.client});
 
   @override
-  Future<NumberTrivia> getConcreteNumberTrivia(int number) async {
-    return await _getNumberTrivia("http://numbersapi.com/$number");
-  }
+  Future<NumberTrivia> getConcreteNumberTrivia(int number) =>
+      _getNumberTrivia("http://numbersapi.com/$number");
 
   @override
-  Future<NumberTrivia> getRandomNumberTrivia() async {
-    return await _getNumberTrivia("http://numbersapi.com/random");
-  }
+  Future<NumberTrivia> getRandomNumberTrivia() =>
+      _getNumberTrivia("http://numbersapi.com/random");
 
   Future<NumberTrivia> _getNumberTrivia(String url) async {
     final response = await client
