@@ -1,4 +1,4 @@
-part of 'number_trivia_bloc.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class NumberTriviaEvent extends Equatable {
   NumberTriviaEvent();
