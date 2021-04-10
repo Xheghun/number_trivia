@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:clean_tdd/core/use_cases/use_case.dart';
 import 'package:clean_tdd/core/util/input_converter.dart';
 import 'package:clean_tdd/feature/number_trivia/domain/use_cases/get_concrete_number_trivia.dart';
 import 'package:clean_tdd/feature/number_trivia/domain/use_cases/get_random_number_trivia.dart';
@@ -35,7 +36,9 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
           inputConverter.stringToUnsignedInteger(event.numberString);
       yield* inputEither.fold((failure) async* {
         yield Error(message: INVALID_INPUT_MESSAGE);
-      }, (integer) => throw UnimplementedError());
+      }, (integer) {
+        getConcreteNumberTrivia(Params(number: integer));
+      });
     }
   }
 

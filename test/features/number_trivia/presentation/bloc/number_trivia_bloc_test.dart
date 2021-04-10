@@ -1,3 +1,4 @@
+import 'package:clean_tdd/core/use_cases/use_case.dart';
 import 'package:clean_tdd/core/util/input_converter.dart';
 import 'package:clean_tdd/feature/number_trivia/domain/entities/number_trivia.dart';
 import 'package:clean_tdd/feature/number_trivia/domain/use_cases/get_concrete_number_trivia.dart';
@@ -43,12 +44,16 @@ main() {
     final tNumberParsed = 1;
     final tNumberTrivia = NumberTrivia(number: 1, text: 'test trivia');
 
+    void setUpMockInputConverterSuccess() {
+      when(mockInputConverter.stringToUnsignedInteger(any))
+          .thenReturn(Right(tNumberParsed));
+    }
+
     test(
         'should call the InputConverter to validate and convert the string to an unsigned int',
         () async {
       //arrange
-      when(mockInputConverter.stringToUnsignedInteger(any))
-          .thenReturn(Right(tNumberParsed));
+      setUpMockInputConverterSuccess();
       //act
       bloc.dispatch(GetTriviaForConcreteNumber(tNumberString));
       await untilCalled(mockInputConverter.stringToUnsignedInteger(any));
@@ -74,6 +79,18 @@ main() {
 
       //act
       bloc.dispatch(GetTriviaForConcreteNumber(tNumberString));
+    });
+
+    test('should get data from the concrete use case', () async {
+      //arrange
+      setUpMockInputConverterSuccess();
+      when(mockGetConcreteNumberTrivia(any))
+          .thenAnswer((realInvocation) async => Right(tNumberTrivia));
+      //act
+      bloc.dispatch(GetTriviaForConcreteNumber(tNumberString));
+      await untilCalled(mockGetConcreteNumberTrivia(any));
+      //assert
+      verify(mockGetConcreteNumberTrivia(Params(number: tNumberParsed)));
     });
   });
 }
