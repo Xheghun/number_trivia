@@ -37,7 +37,7 @@ main() {
 
   test('initial  state should be Empty', () {
     //asert
-    expect(bloc.initialState, equals(Empty()));
+    expect(bloc.state, equals(Empty()));
   });
 
   group('GetTriviaForConcreteNumber', () {
@@ -56,7 +56,7 @@ main() {
       //arrange
       setUpMockInputConverterSuccess();
       //act
-      bloc.dispatch(GetTriviaForConcreteNumber(tNumberString));
+      bloc.add(GetTriviaForConcreteNumber(tNumberString));
       await untilCalled(mockInputConverter.stringToUnsignedInteger(any));
 
       //assert
@@ -79,7 +79,7 @@ main() {
       );
 
       //act
-      bloc.dispatch(GetTriviaForConcreteNumber(tNumberString));
+      bloc.add(GetTriviaForConcreteNumber(tNumberString));
     });
 
     test('should get data from the concrete use case', () async {
@@ -88,7 +88,7 @@ main() {
       when(mockGetConcreteNumberTrivia(any))
           .thenAnswer((realInvocation) async => Right(tNumberTrivia));
       //act
-      bloc.dispatch(GetTriviaForConcreteNumber(tNumberString));
+      bloc.add(GetTriviaForConcreteNumber(tNumberString));
       await untilCalled(mockGetConcreteNumberTrivia(any));
       //assert
       verify(mockGetConcreteNumberTrivia(Params(number: tNumberParsed)));
@@ -107,7 +107,7 @@ main() {
 
         expectLater(bloc.state, emitsInOrder(expected));
 //act
-        bloc.dispatch(GetTriviaForConcreteNumber(tNumberString));
+        bloc.add(GetTriviaForConcreteNumber(tNumberString));
       },
     );
 
@@ -128,7 +128,7 @@ main() {
 
         expectLater(bloc.state, emitsInOrder(expected));
 //act
-        bloc.dispatch(GetTriviaForConcreteNumber(tNumberString));
+        bloc.add(GetTriviaForConcreteNumber(tNumberString));
       },
     );
 
@@ -149,7 +149,7 @@ main() {
 
         expectLater(bloc.state, emitsInOrder(expected));
 //act
-        bloc.dispatch(GetTriviaForConcreteNumber(tNumberString));
+        bloc.add(GetTriviaForConcreteNumber(tNumberString));
       },
     );
   });
@@ -162,7 +162,7 @@ main() {
       when(mockGetRandomNumberTrivia(NoParams()))
           .thenAnswer((realInvocation) async => Right(tNumberTrivia));
       //act
-      bloc.dispatch(GetTriviaForRandomNumber());
+      bloc.add(GetTriviaForRandomNumber());
       await untilCalled(mockGetRandomNumberTrivia(NoParams()));
       //assert
       verify(mockGetRandomNumberTrivia(NoParams()));
@@ -180,7 +180,7 @@ main() {
 
         expectLater(bloc.state, emitsInOrder(expected));
 //act
-        bloc.dispatch(GetTriviaForRandomNumber());
+        bloc.add(GetTriviaForRandomNumber());
       },
     );
 
@@ -200,7 +200,7 @@ main() {
 
         expectLater(bloc.state, emitsInOrder(expected));
 //act
-        bloc.dispatch(GetTriviaForRandomNumber());
+        bloc.add(GetTriviaForRandomNumber());
       },
     );
 
@@ -220,7 +220,7 @@ main() {
 
         expectLater(bloc.state, emitsInOrder(expected));
 //act
-        bloc.dispatch(GetTriviaForRandomNumber());
+        bloc.add(GetTriviaForRandomNumber());
       },
     );
   });

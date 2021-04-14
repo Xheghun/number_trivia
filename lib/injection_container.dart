@@ -1,6 +1,5 @@
 import 'package:clean_tdd/core/network/network_info.dart';
 import 'package:clean_tdd/core/util/input_converter.dart';
-import 'package:clean_tdd/feature/number_trivia/data/data_sources/number_trivia_local_datasource.dart';
 import 'package:clean_tdd/feature/number_trivia/data/data_sources/number_trivia_remote_datasource.dart';
 import 'package:clean_tdd/feature/number_trivia/data/repositories/number_trivia_repo_impl.dart';
 import 'package:clean_tdd/feature/number_trivia/domain/repositories/number_trivia_repo.dart';
@@ -12,37 +11,39 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-final _locator = GetIt.instance;
+import 'feature/number_trivia/data/data_sources/number_trivia_local_datasource.dart';
+
+final locator = GetIt.instance;
 
 Future<void> init() async {
   final SharedPreferences sharedPreferences =
       await SharedPreferences.getInstance();
   //! Features - NumberTrivia
   //bloc
-  _locator
+  locator
     ..registerFactory(() => NumberTriviaBloc(
-        concrete: _locator(), converter: _locator(), random: _locator()))
+        concrete: locator(), converter: locator(), random: locator()))
 
     //use cases
-    ..registerLazySingleton(() => GetConcreteNumberTrivia(_locator()))
-    ..registerLazySingleton(() => GetRandomNumberTrivia(_locator()))
+    ..registerLazySingleton(() => GetConcreteNumberTrivia(locator()))
+    ..registerLazySingleton(() => GetRandomNumberTrivia(locator()))
 
     //repository
     ..registerLazySingleton<NumberTriviaRepository>(() =>
         NumberTriviaRepositoryImpl(
-            remoteDataSource: _locator(),
-            localDataSource: _locator(),
-            networkInfo: _locator()))
+            remoteDataSource: locator(),
+            localDataSource: locator(),
+            networkInfo: locator()))
 
     //Data
     ..registerLazySingleton<NumberTriviaLocalDataSource>(
-        () => NumberTriviaLocalDataSourceImpl(sharedPreferences: _locator()))
+        () => NumberTriviaLocalDataSourceImpl(sharedPreferences: locator()))
     ..registerLazySingleton<NumberTriviaRemoteDataSource>(
-        () => NumberTriviaRemoteDataSourceImpl(client: _locator()))
+        () => NumberTriviaRemoteDataSourceImpl(client: locator()))
 
     //! Core
     ..registerLazySingleton(() => InputConverter())
-    ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(_locator()))
+    ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(locator()))
 
     //! External
 

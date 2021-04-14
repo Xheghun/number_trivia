@@ -28,7 +28,7 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
         assert(converter != null),
         getConcreteNumberTrivia = concrete,
         getRandomNumberTrivia = random,
-        inputConverter = converter;
+        inputConverter = converter, super(null);
 
   @override
   Stream<NumberTriviaState> mapEventToState(
@@ -71,7 +71,4 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
         return "Unexpected Error";
     }
   }
-
-  @override
-  NumberTriviaState get initialState => Empty();
 }

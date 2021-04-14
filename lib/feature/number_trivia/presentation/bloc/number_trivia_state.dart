@@ -3,10 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 abstract class NumberTriviaState extends Equatable {
-  NumberTriviaState();
-
-  @override
-  List<Object> get props => [];
+  NumberTriviaState([List props = const <dynamic>[]]) : super(props);
 }
 
 class Empty extends NumberTriviaState {}
