@@ -28,7 +28,8 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
         assert(converter != null),
         getConcreteNumberTrivia = concrete,
         getRandomNumberTrivia = random,
-        inputConverter = converter, super(null);
+        inputConverter = converter,
+        super(Empty());
 
   @override
   Stream<NumberTriviaState> mapEventToState(
