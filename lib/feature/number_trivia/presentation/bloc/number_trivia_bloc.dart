@@ -49,13 +49,11 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
         final failureOrTrivia =
             await getConcreteNumberTrivia(Params(number: integer));
         yield* _eitherLoadingOrErrorState(failureOrTrivia);
-        getConcreteNumberTrivia(Params(number: integer));
       });
     } else if (event is GetTriviaForRandomNumber) {
       yield Loading();
       final failureOrTrivia = await getRandomNumberTrivia(NoParams());
       yield* _eitherLoadingOrErrorState(failureOrTrivia);
-      getRandomNumberTrivia(NoParams());
     }
   }
 
