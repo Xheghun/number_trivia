@@ -1,7 +1,12 @@
-import 'package:clean_tdd/feature/number_trivia/presentation/bloc/bloc.dart';
-import 'package:clean_tdd/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../injection_container.dart';
+import '../../domain/entities/number_trivia.dart';
+import '../bloc/bloc.dart';
+import '../widgets/loaded_widget.dart';
+import '../widgets/loading_widget.dart';
+import '../widgets/message_display_widget.dart';
 
 class NumberTriviaPage extends StatelessWidget {
   @override
@@ -31,7 +36,14 @@ class NumberTriviaPage extends StatelessWidget {
                         height: height, message: state.message);
                   else if (state is Loading)
                     return LoadingWidget();
-                  else if (state is Loaded) return LoadedWidget();
+                  else if (state is Loaded)
+                    return LoadedWidget(
+                      height: height,
+                      numberTrivia: NumberTrivia(
+                          number: 362,
+                          text:
+                              "This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample trivia This is a sample triviaThis is a sample triviaThis is a sample trivia This is a sample triviaThis is a sample trivia This is a sample trivia This is a sample triviaThis is a sample triviaThis is a sample triviaThis is a sample triviaThis is a sample triviaThis is a sample triviaThis is a sample triviaThis is a sample triviaThis is a sample triviaThis is a sample triviaThis is a sample trivia"),
+                    );
                   return Container();
                 },
               ),
@@ -43,7 +55,7 @@ class NumberTriviaPage extends StatelessWidget {
               Column(
                 children: [
                   Placeholder(
-                    fallbackHeight: mediaQuery.size.height / 2.5,
+                    fallbackHeight: mediaQuery.size.height * 0.05,
                   ),
                   SizedBox(
                     height: mediaQuery.size.width * 0.04,
@@ -76,57 +88,5 @@ class NumberTriviaPage extends StatelessWidget {
           title: Text("Trivia"),
         ),
         body: _buildBody(context));
-  }
-}
-
-class MessageDisplay extends StatelessWidget {
-  final String message;
-  final double height;
-  const MessageDisplay({Key key, this.height, this.message}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        alignment: Alignment.center,
-        height: height,
-        child: Text("Start Searching",
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
-      ),
-    );
-  }
-}
-
-class LoadingWidget extends StatelessWidget {
-  final double height;
-  const LoadingWidget({
-    Key key,
-    this.height,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        alignment: Alignment.center,
-        height: height,
-        child: CircularProgressIndicator());
-  }
-}
-
-class LoadedWidget extends StatelessWidget {
-  final String message;
-  final double height;
-  const LoadedWidget({Key key, this.height, this.message}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        alignment: Alignment.center,
-        height: height,
-        child: Text("Start Searching",
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
-      ),
-    );
   }
 }

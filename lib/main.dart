@@ -1,6 +1,6 @@
-import 'package:clean_tdd/feature/number_trivia/presentation/pages/number_trivia_page.dart';
 import 'package:flutter/material.dart';
 
+import 'feature/number_trivia/presentation/pages/number_trivia_page.dart';
 import 'injection_container.dart' as di;
 
 void main() async {

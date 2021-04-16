@@ -1,14 +1,16 @@
 import 'dart:async';
-import 'package:clean_tdd/core/error/failures.dart';
-import 'package:clean_tdd/core/use_cases/use_case.dart';
-import 'package:clean_tdd/core/util/input_converter.dart';
-import 'package:clean_tdd/feature/number_trivia/domain/entities/number_trivia.dart';
-import 'package:clean_tdd/feature/number_trivia/domain/use_cases/get_concrete_number_trivia.dart';
-import 'package:clean_tdd/feature/number_trivia/domain/use_cases/get_random_number_trivia.dart';
+
+import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
+
+import '../../../../core/error/failures.dart';
+import '../../../../core/use_cases/use_case.dart';
+import '../../../../core/util/input_converter.dart';
+import '../../domain/entities/number_trivia.dart';
+import '../../domain/use_cases/get_concrete_number_trivia.dart';
+import '../../domain/use_cases/get_random_number_trivia.dart';
 import 'bloc.dart';
-import 'package:bloc/bloc.dart';
 
 const String SERVER_FAILRE_MESSAGE = "Server Failure";
 const String CACHE_FAILURE_MESSAGE = "Cache Failure";
@@ -29,7 +31,7 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
         getConcreteNumberTrivia = concrete,
         getRandomNumberTrivia = random,
         inputConverter = converter,
-        super(Empty());
+        super(Loaded());
 
   @override
   Stream<NumberTriviaState> mapEventToState(

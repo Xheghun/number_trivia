@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:clean_tdd/core/constants/keys.dart';
-import 'package:clean_tdd/core/error/exceptions.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/constants/keys.dart';
+import '../../../../core/error/exceptions.dart';
 import '../models/number_trivia_model.dart';
 
 abstract class NumberTriviaLocalDataSource {

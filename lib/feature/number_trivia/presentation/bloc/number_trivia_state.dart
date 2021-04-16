@@ -1,6 +1,7 @@
-import 'package:clean_tdd/feature/number_trivia/domain/entities/number_trivia.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+
+import '../../domain/entities/number_trivia.dart';
 
 abstract class NumberTriviaState extends Equatable {
   NumberTriviaState([List props = const <dynamic>[]]) : super(props);

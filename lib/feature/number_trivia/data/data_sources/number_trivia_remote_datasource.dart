@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:clean_tdd/core/error/exceptions.dart';
-import 'package:clean_tdd/feature/number_trivia/data/models/number_trivia_model.dart';
-
-import '../../domain/entities/number_trivia.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
+
+import '../../../../core/error/exceptions.dart';
+import '../../domain/entities/number_trivia.dart';
+import '../models/number_trivia_model.dart';
 
 abstract class NumberTriviaRemoteDataSource {
   /// Calls the http://numberapi.com/{number} endpoint
