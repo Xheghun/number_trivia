@@ -31,7 +31,9 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
         getConcreteNumberTrivia = concrete,
         getRandomNumberTrivia = random,
         inputConverter = converter,
-        super(Loaded());
+        super(Loaded(
+            trivia: NumberTrivia(
+                number: 92, text: "Hello  user this nuumber is super!")));
 
   @override
   Stream<NumberTriviaState> mapEventToState(
